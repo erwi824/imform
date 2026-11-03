@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龍華科技大學 - 就讀意願表</title>
+    <!-- 引入 Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; padding-top: 20px; padding-bottom: 50px; }
+        .form-container { background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .section-title { border-bottom: 2px solid #0d6efd; padding-bottom: 10px; margin-bottom: 20px; color: #0d6efd; }
+        .dept-rank-input { width: 60px; display: inline-block; margin-right: 10px; text-align: center; }
+        
+        /* 列印專用樣式 (@media print) */
+        @media print {
+            body { background-color: white; padding: 0; }
+            .form-container { box-shadow: none; border: none; padding: 0; margin: 0; }
+            .no-print, #querySection, .btn { display: none !important; } /* 隱藏查詢區與按鈕 */
+            input, select { border: none !important; border-bottom: 1px solid #000 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; }
+            input[type="checkbox"], input[type="radio"] { border: 1px solid #000 !important; }
+            .section-title { border-bottom: 1px solid #000; color: #000; }
+            .container { width: 100%; max-width: 100%; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 表單區塊 -->
+    <div class="form-container" id="formSection">
+        <div class="text-center mb-4">
+            <h2>龍華科技大學就讀意願表管理系統</h2>
+            <h4 class="mb-3">龍華科技大學就讀意願表</h4>
+            <p class="text-muted small">(以下個人資料僅提供龍華科技大學入學招生資料使用，您所提供的資料將不會提供給任何個人或機構使用)</p>
+        </div>
+
+        <form id="willingnessForm">
+            <!-- 基本資料 -->
+            <h5 class="section-title">基本資料</h5>
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">姓名 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="請輸入姓名" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">手機號碼 <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="09xx-xxx-xxx" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">身分證字號</label>
+                    <input type="text" class="form-control" id="idNumber" name="idNumber" placeholder="10碼身分證號" maxlength="10">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">LINE ID</label>
+                    <input type="text" class="form-control" id="lineId" name="lineId" placeholder="個人 LINE ID">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">目前就讀學校 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="school" name="school" placeholder="例如: 中壢家商" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">目前就讀科別</label>
+                    <input type="text" class="form-control" id="department" name="department" placeholder="例如: 資處科">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">目前就讀年級</label>
+                    <input type="text" class="form-control" id="grade" name="grade" placeholder="例如: 高三">
+                </div>
+                <div class="col-12 mt-3">
+                    <label class="form-label d-block">有無報考統測</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tveExam" value="有" checked>
+                        <label class="form-check-label">有</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tveExam" value="無">
+                        <label class="form-check-label">無</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 意願表來源 -->
+            <h5 class="section-title">意願表來源 (可複選)</h5>
+            <div class="mb-4">
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="source" value="升學博覽會"> <label class="form-check-label">升學博覽會</label></div>
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="source" value="來校參訪"> <label class="form-check-label">來校參訪</label></div>
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="source" value="入班宣導"> <label class="form-check-label">入班宣導</label></div>
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="source" value="輔導課程"> <label class="form-check-label">輔導課程</label></div>
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="source" value="自行報名"> <label class="form-check-label">自行報名</label></div>
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="source" value="其他"> <label class="form-check-label">其他</label></div>
+            </div>
+
+            <!-- 預計入學管道 -->
+            <h5 class="section-title">預計入學管道 (請勾選，可複選)</h5>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <p class="fw-bold">日間部</p>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="高中申請入學"> <label class="form-check-label">高中申請入學</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="繁星計畫"> <label class="form-check-label">繁星計畫</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="甄選入學"> <label class="form-check-label">甄選入學</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="技優甄審"> <label class="form-check-label">技優甄審</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="聯合登記分發"> <label class="form-check-label">聯合登記分發</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="獨招"> <label class="form-check-label">獨招</label></div>
+                </div>
+                <div class="col-md-6 mt-3 mt-md-0">
+                    <p class="fw-bold">進修部</p>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="高中生獨招"> <label class="form-check-label">高中生獨招</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="高職生單獨招生"> <label class="form-check-label">高職生單獨招生</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="產學媒合班"> <label class="form-check-label">產學媒合班</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="產學攜手專班"> <label class="form-check-label">產學攜手專班</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" name="channel" value="產學訓專班"> <label class="form-check-label">產學訓專班</label></div>
+                </div>
+            </div>
+
+            <!-- 有意願的系所 -->
+            <h5 class="section-title">有意願的系所 (請依志願標註排序 1, 2, 3...)</h5>
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">工程學院</p>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="機械工程系" min="1">機械工程系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="半導體工程系" min="1">半導體工程系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="電機工程系" min="1">電機工程系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="電子工程系" min="1">電子工程系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="資訊工程系" min="1">資訊工程系</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">管理學院</p>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="數位商務系" min="1">數位商務系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="財務金融系" min="1">財務金融系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="企業管理系" min="1">企業管理系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="資訊管理系" min="1">資訊管理系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="工業管理系" min="1">工業管理系</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <p class="fw-bold">人文暨設計學院</p>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="多媒體與遊戲發展系" min="1">多媒體與遊戲發展系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="應用外語系" min="1">應用外語系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="觀光休閒系" min="1">觀光休閒系</div>
+                    <div class="d-flex align-items-center mb-2"><input type="number" class="form-control dept-rank-input" data-dept="文化創意與數位多媒體設計系" min="1">文化創意與數位多媒體設計系</div>
+                </div>
+            </div>
+
+            <!-- 其他資料 -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">推薦人 (推薦老師或服務人員)</label>
+                    <input type="text" class="form-control" id="recommender" name="recommender">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">填寫日期</label>
+                    <input type="date" class="form-control" id="fillDate" name="fillDate">
+                </div>
+            </div>
+
+            <div class="text-center mt-5 no-print">
+                <button type="submit" class="btn btn-primary btn-lg px-5 me-3" id="submitBtn">提交存檔</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="window.print()">列印 / 匯出 PDF</button>
+            </div>
+            
+            <p class="text-center text-muted mt-3 small">【選龍華一生榮華】此問卷非報名，只提供就讀意願供本校與您聯繫。</p>
+        </form>
+    </div>
+
+    <!-- 線上查詢區塊 (列印時隱藏) -->
+    <div class="form-container no-print" id="querySection">
+        <h5 class="section-title">線上查詢紀錄</h5>
+        <div class="row g-3 align-items-end">
+            <div class="col-md-8">
+                <label class="form-label">請輸入「手機號碼」或「姓名」進行查詢：</label>
+                <input type="text" class="form-control" id="queryInput" placeholder="例如: 0912-345-678 或 王小明">
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-success w-100" id="queryBtn" onclick="searchRecord()">查詢紀錄</button>
+            </div>
+        </div>
+        
+        <div id="queryResult" class="mt-4" style="display: none;">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>填寫時間</th>
+                        <th>姓名</th>
+                        <th>手機號碼</th>
+                        <th>學校</th>
+                        <th>預計入學管道</th>
+                    </tr>
+                </thead>
+                <tbody id="resultBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ==========================================
+    // 請將下方的 URL 替換成您在 Google Apps Script 部署取得的「網頁應用程式網址」
+    // ==========================================
+    const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw6T61wUXBnPnTmJv07hd7iwKw9cyewi9tXhRlFcQp4D2cbxEluzRyfqpEvV_fK0S_r/exec'; 
+    
+    // 自動填入今日日期
+    document.getElementById('fillDate').valueAsDate = new Date();
+
+    // 處理表單提交
+    document.getElementById('willingnessForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 傳送中...';
+
+        // 收集欄位資料
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
+        
+        // 處理複選框 (來源、管道)
+        data.source = Array.from(document.querySelectorAll('input[name="source"]:checked')).map(el => el.value).join('、');
+        data.channel = Array.from(document.querySelectorAll('input[name="channel"]:checked')).map(el => el.value).join('、');
+        
+        // 處理系所排序
+        let ranks = [];
+        document.querySelectorAll('.dept-rank-input').forEach(input => {
+            if (input.value) {
+                ranks.push(`第${input.value}志願: ${input.getAttribute('data-dept')}`);
+            }
+        });
+        // 依志願排序字串
+        ranks.sort(); 
+        data.departmentsRank = ranks.join('\n');
+
+        // 傳送資料到 Google Apps Script (使用 text/plain 避免 CORS preflight)
+        fetch(GAS_WEB_APP_URL, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8' 
+            }
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.status === 'success') {
+                alert('資料已成功上傳至雲端存檔！');
+                this.reset();
+                document.getElementById('fillDate').valueAsDate = new Date();
+            } else {
+                alert('上傳失敗: ' + result.message);
+            }
+        })
+        .catch(error => {
+            alert('系統發生錯誤，請稍後再試！\n' + error);
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '提交存檔';
+        });
+    });
+
+    // 處理線上查詢
+    function searchRecord() {
+        const queryVal = document.getElementById('queryInput').value.trim();
+        if (!queryVal) {
+            alert('請輸入姓名或手機號碼！');
+            return;
+        }
+
+        const queryBtn = document.getElementById('queryBtn');
+        queryBtn.disabled = true;
+        queryBtn.innerText = '查詢中...';
+
+        // 透過 GET 請求呼叫 GAS，附帶 query 參數
+        fetch(`${GAS_WEB_APP_URL}?query=${encodeURIComponent(queryVal)}`)
+        .then(response => response.json())
+        .then(result => {
+            const resultDiv = document.getElementById('queryResult');
+            const tbody = document.getElementById('resultBody');
+            tbody.innerHTML = ''; // 清空舊結果
+
+            if (result.status === 'success' && result.data.length > 0) {
+                result.data.forEach(row => {
+                    // 格式化時間
+                    const dateObj = new Date(row.timestamp);
+                    const formattedDate = dateObj.toLocaleString('zh-TW');
+                    
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${formattedDate}</td>
+                        <td>${row.name}</td>
+                        <td>${row.phone}</td>
+                        <td>${row.school}</td>
+                        <td>${row.channel || '未填寫'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                resultDiv.style.display = 'block';
+            } else {
+                alert('找不到相符的紀錄。');
+                resultDiv.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            alert('查詢失敗，請檢查網路狀態或網址設定。\n' + error);
+        })
+        .finally(() => {
+            queryBtn.disabled = false;
+            queryBtn.innerText = '查詢紀錄';
+        });
+    }
+</script>
+</body>
+</html>
